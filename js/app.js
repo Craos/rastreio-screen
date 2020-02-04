@@ -1,29 +1,93 @@
-var myLayout = new dhtmlXLayoutObject({
+let mysidebar;
 
-    parent:     "layoutObj",    // id/object, parent container for layout
-    pattern:    "3L",           // string, layout's pattern
-    skin:       "dhx_skyblue",  // optional,"dhx_skyblue"/"dhx_web"/"dhx_terrace"
+let app = function() {
 
-    offsets: {          // optional, offsets for fullscreen init
-        top:    10,     // you can specify all four sides
-        right:  10,     // or only the side where you want to have an offset
-        bottom: 10,
-        left:   10
-    },
+    console.log('app carregado');
 
-    cells: [    // optional, cells configuration according to the pattern
-        // you can specify only the cells you want to configure
-        // all params are optional
-        {
-            id:             "a",        // id of the cell you want to configure
-            text:           "Text",     // header text
-            collapsed_text: "Text 2",   // header text for a collapsed cell
-            header:         false,      // hide header on init
-            width:          100,        // cell init width
-            height:         100,        // cell init height
-            collapse:       true        // collapse on init
-            fix_size:       [true,null] // fix cell's size, [width,height]
+    mySidebar = new dhtmlXSideBar({
+
+        parent:         document.body,
+        template:       "icons",
+        icons_path:     "icons/",
+        single_cell:    false,
+        bubble:         6,
+        width:          40,
+        header:         true,
+        autohide:       false,
+        offsets: {          // optional, offsets for fullscreen init
+            top:    0,     // you can specify all four sides
+            right:  0,     // or only the side where you want to have an offset
+            bottom: 0,
+            left:   0
         },
-        {}, // other cell if any
-    ]
-});
+        items: [
+            {
+                id:         "dashboard",
+                text:       "Dashboard",
+                icon:       "../img/dashboard.png",
+                selected:   true
+            },
+            {
+                id:         "sep1",
+                type:       "separator"
+            },
+            {
+                id:         "chamados",
+                text:       "Chamados",
+                icon:       "../img/chamado.png",
+                selected:   false
+            },
+            {
+                id:         "sep1",
+                type:       "separator"
+            },
+            {
+                id:         "registros",
+                text:       "Eventos",
+                icon:       "../img/registro.png",
+                selected:   false
+            },
+            {
+                id:         "sep1",
+                type:       "separator"
+            },
+            {
+                id:         "fila",
+                text:       "Registros",
+                icon:       "../img/fila.png",
+                selected:   false
+            },
+            {
+                id:         "sep1",
+                type:       "separator"
+            },
+            {
+                id:         "controldesk",
+                text:       "Controldesk",
+                icon:       "../img/controldesk.png",
+                selected:   false
+            },
+            // {
+            //     id:         "sep1",
+            //     type:       "separator"
+            // },
+            // {
+            //     id:         "configuracoes",
+            //     text:       " Configurações",
+            //     icon:       "../img/configuracoes.png",
+            //     selected:   false
+            // },
+        ]
+    });
+
+    mySidebar.attachEvent("onSelect", function(id, lastId){
+
+        if (id === 'rastreio'){
+            rastreio();
+
+            console.log('chegou no if');
+        }
+
+    });
+
+};
